@@ -1,0 +1,27 @@
+[package]
+name = "muse-workbench-backend"
+version = "0.1.0"
+edition = "2021"
+description = "Backend server for the Muse Workbench: PTY terminal over WebSocket, file management, encrypted credential vault, system stats."
+
+[dependencies]
+axum = { version = "0.8", features = ["ws", "multipart"] }
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.6", features = ["cors", "fs"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+portable-pty = "0.8"
+futures = "0.3"
+thiserror = "2"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+aes-gcm = "0.10"
+rand = "0.8"
+zeroize = { version = "1", features = ["derive"] }
+sysinfo = "0.32"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+base64 = "0.22"
+
+[profile.release]
+opt-level = 2

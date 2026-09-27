@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  .dark {
+    --background: 224 28% 7%;
+    --foreground: 220 14% 93%;
+    --card: 224 24% 10%;
+    --card-foreground: 220 14% 93%;
+    --popover: 224 26% 9%;
+    --popover-foreground: 220 14% 93%;
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 224 20% 15%;
+    --secondary-foreground: 220 14% 88%;
+    --muted: 224 18% 13%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 224 22% 16%;
+    --accent-foreground: 220 14% 93%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 224 18% 16%;
+    --input: 224 18% 18%;
+    --ring: 258 90% 66%;
+    --radius: 0.65rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
+  }
+}
+
+/* 精致滚动条 */
+@layer utilities {
+  .scroll-slim {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scroll-slim::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroll-slim::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 8px;
+  }
+  .scroll-slim::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+  .scroll-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .font-mono2 {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+      "Liberation Mono", monospace;
+  }
+  .glass {
+    background: hsl(var(--card) / 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  /* 密钥输入掩码（textarea 不支持 type=password，用 CSS 圆点替代） */
+  .secret-mask {
+    -webkit-text-security: disc;
+    text-security: disc;
+  }
+}
+
+/* xterm 终端容器 */
+.xterm-viewport {
+  scrollbar-width: thin;
+}
