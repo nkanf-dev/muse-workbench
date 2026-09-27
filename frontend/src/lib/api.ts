@@ -58,7 +58,24 @@ export const SystemStatsSchema = Schema.Struct({
   cpu_usage: Schema.Number,
   mem_total: Schema.Number,
   mem_used: Schema.Number,
-  load_avg: Schema.Array(Schema.Number),
+  // 后端返回 { one, five, fifteen } 对象，转成 [1min, 5min, 15min] 数组供 UI 使用
+  load_avg: Schema.transform(
+    Schema.Struct({
+      one: Schema.Number,
+      five: Schema.Number,
+      fifteen: Schema.Number,
+    }),
+    Schema.Array(Schema.Number),
+    {
+      strict: true,
+      decode: (obj) => [obj.one, obj.five, obj.fifteen],
+      encode: (arr) => ({
+        one: arr[0] ?? 0,
+        five: arr[1] ?? 0,
+        fifteen: arr[2] ?? 0,
+      }),
+    }
+  ),
 });
 export type SystemStats = Schema.Schema.Type<typeof SystemStatsSchema>;
 
